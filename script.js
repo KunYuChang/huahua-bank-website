@@ -123,8 +123,10 @@ tabsContainer.addEventListener('click', e => {
 
 // ⚡Menu fade animation
 const handleHover = (e, opacity) => {
+  // 確認滑鼠滑到的是nav__link類別
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
+    // 先用closest找到老爸老媽，之後再用querySelectorAll尋找目標
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
     const logo = link.closest('.nav').querySelector('img');
 
@@ -141,4 +143,18 @@ nav.addEventListener('mouseover', e => {
 
 nav.addEventListener('mouseout', e => {
   handleHover(e, 1);
+});
+
+///////////////////////////////////////
+///////////////////////////////////////
+
+// ⚡Sticky navigation
+const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+
+window.addEventListener('scroll', () => {
+  console.log(window.scrollY);
+
+  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
 });
