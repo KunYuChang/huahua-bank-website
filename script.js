@@ -149,12 +149,86 @@ nav.addEventListener('mouseout', e => {
 ///////////////////////////////////////
 
 // ⚡Sticky navigation
-const initialCoords = section1.getBoundingClientRect();
-console.log(initialCoords);
+// const initialCoords = section1.getBoundingClientRect();
+// console.log(initialCoords);
 
-window.addEventListener('scroll', () => {
-  console.log(window.scrollY);
+// window.addEventListener('scroll', () => {
+//   console.log(window.scrollY);
 
-  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+//   if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+//   else nav.classList.remove('sticky');
+// });
+
+// ⚡Sticky navigation: Intersection Observer API
+
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   });
+// };
+
+// const obsOptions = {
+//   root: null,
+//   threshold: [0, 0.2],
+// };
+
+// /*
+// root：預設（未指定，或值設定為 null 時）是以瀏覽器的 viewport 為範圍來判定目標元素的進出與否，然而也能在此設定要改以哪個其他元素作為觀察範圍 — 需要注意的是「root 必須要是所有目標元素的父元素（或祖父層的元素）」
+
+// threshold：設定目標元素的可見度達到多少比例時，觸發 callback 函式。可以帶入單一一個值：「只想在可見度達一個比例時觸發」；也可帶入一個陣列：「想在可見度達多個比例時觸發」
+// 👉 觀察範圍就是前面設定的 root 搭配 rootMargin 所劃定
+// 👉 預設值為 0：一但目標進入或目標的最後一個 px 離開觀察範圍時就觸發
+// 👉 設定為 0.5 ：一但可見度為 50% 時就觸發
+// 👉 設定為 [0, 0.25, 0.5, 0.75, 1]：可見度每跳 25% 時就觸發
+// 👉 設定為 1：可見度達 100% 或一但往下掉低於 100% 時就觸發
+// */
+
+// // 建立一個觀察者
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+// // 觀察者.觀察(被觀察者)
+// observer.observe(section1);
+
+const headerSection = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+
+headerObserver.observe(headerSection);
+
+///////////////////////////////////////
+///////////////////////////////////////
+
+// ⚡滾動顯示元素
+const allTheSections = document.querySelectorAll('.section');
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allTheSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
 });
