@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="img/icon.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>花花銀行網站</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <img src="img/logo.png" alt="huahuaback" logo" class="nav__logo"
+        id="logo" />
+        <ul class="nav__links">
+          <li class="nav__item">
+            <a class="nav__link" href="#section--1">銀行特色</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--2">服務內容</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--3">用戶感言</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link nav__link--btn btn--show-modal" href="#"
+              >馬上開戶</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header__title">
+        <h1>
+          當
+          <!-- Green highlight effect -->
+          <span class="highlight">銀行業</span>
+          遇到<br />
+          <span class="highlight">極簡主義者</span>
+        </h1>
+        <h4>更簡單的銀行體驗，讓生活更簡單。</h4>
+        <button class="btn--text btn--scroll-to">了解更多 &DownArrow;</button>
+        <img src="img/hero.png" class="header__img" alt="極簡主義的銀行" />
+      </div>
+    </header>
+
+    <section class="section" id="section--1">
+      <div class="section__title">
+        <h2 class="section__description">銀行特色</h2>
+        <h3 class="section__header">涵蓋現代銀行所需的一切。</h3>
+      </div>
+
+      <div class="features">
+        <img
+          src="img/digital-lazy.jpg"
+          data-src="img/digital.jpg"
+          alt="Computer"
+          class="features__img lazy-img"
+        />
+        <div class="features__feature">
+          <div class="features__icon">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-monitor"></use>
+            </svg>
+          </div>
+          <h5 class="features__header">數位化銀行服務</h5>
+          <p>
+            富蘭克林曾提出，你熱愛生命嗎?那麼別浪費時間，因為時間是組成生命的材料。強烈建議大家把這段話牢牢記住。易卜生講過一段耐人尋思的話，在高空中建造的樓閣決不會有堅實。這段話的餘韻不斷在我腦海中迴盪著。銀行似乎是一種巧合，但如果我們從一個更大的角度看待問題，這似乎是一種不可避免的事實。
+          </p>
+        </div>
+
+        <div class="features__feature">
+          <div class="features__icon">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-trending-up"></use>
+            </svg>
+          </div>
+          <h5 class="features__header">看著你的錢不斷增長</h5>
+          <p>
+            每個人都不得不面對這些問題。在面對這種問題時，務必詳細考慮錢變多的各種可能。錢變多，到底應該如何實現。錢變多對我來說有著舉足輕重的地位，必須要嚴肅認真的看待。孝經在過去曾經講過，安上治民，莫善於禮。這段話讓我的心境提高了一個層次。
+          </p>
+        </div>
+        <img
+          src="img/grow-lazy.jpg"
+          data-src="img/grow.jpg"
+          alt="Plant"
+          class="features__img lazy-img"
+        />
+
+        <img
+          src="img/card-lazy.jpg"
+          data-src="img/card.jpg"
+          alt="Credit card"
+          class="features__img lazy-img"
+        />
+        <div class="features__feature">
+          <div class="features__icon">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-credit-card"></use>
+            </svg>
+          </div>
+          <h5 class="features__header">包括免費的金融卡</h5>
+          <p>
+            羅丹在過去曾經講過，我可以一再堅持我們的貢獻，那是因為，只有這種看法，才能在世界上有權力贏得人類的同情。想必各位已經看出了其中的端倪。而這些並不是完全重要，更加重要的問題是，把金融卡輕鬆帶過，顯然並不適合。不要先入為主覺得金融卡很複雜，實際上，金融卡可能比你想的還要更複雜。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="section--2">
+      <div class="section__title">
+        <h2 class="section__description">服務內容</h2>
+        <h3 class="section__header">沒有最簡單，只有一切都盡可能的更簡單。</h3>
+      </div>
+
+      <div class="operations">
+        <div class="operations__tab-container">
+          <button
+            class="
+              btn
+              operations__tab operations__tab--1 operations__tab--active
+            "
+            data-tab="1"
+          >
+            <span>01</span>即時匯款
+          </button>
+          <button class="btn operations__tab operations__tab--2" data-tab="2">
+            <span>02</span>即時貸款
+          </button>
+          <button class="btn operations__tab operations__tab--3" data-tab="3">
+            <span>03</span>關閉帳戶
+          </button>
+        </div>
+        <div
+          class="
+            operations__content
+            operations__content--1
+            operations__content--active
+          "
+        >
+          <div class="operations__icon operations__icon--1">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-upload"></use>
+            </svg>
+          </div>
+          <h5 class="operations__header">
+            立即轉賬給任何人！不收取任何費用，信我一把。
+          </h5>
+          <p>
+            在人生的歷程中，信我一把的出現是必然的。話雖如此，我們卻也不能夠這麼篤定。我們一般認為，抓住了問題的關鍵，其他一切則會迎刃而解。孔丘講過一句值得人反覆尋思的話，始吾於人也，聽其言而信其行。今吾於人也，聽其言而觀其行。想必各位已經看出了其中的端倪。
+          </p>
+        </div>
+
+        <div class="operations__content operations__content--2">
+          <div class="operations__icon operations__icon--2">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-home"></use>
+            </svg>
+          </div>
+          <h5 class="operations__header">
+            通過即時貸款購買房屋或實現您的夢想。
+          </h5>
+          <p>
+            總而言之，魯迅曾經認為，上人生的旅途罷。前途很遠，也很暗。然而不要怕。不怕的人的面前才有路。這段話讓我所有的疑惑頓時豁然開朗。現在，正視買房的問題，是非常非常重要的。因為，買房必定會成為未來世界的新標準。對買房進行深入研究，在現今時代已經無法避免了。
+          </p>
+        </div>
+        <div class="operations__content operations__content--3">
+          <div class="operations__icon operations__icon--3">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-user-x"></use>
+            </svg>
+          </div>
+          <h5 class="operations__header">
+            不再需要您的帳戶？ 沒問題！ 立即關閉它。
+          </h5>
+          <p>
+            在這種困難的抉擇下，本人思來想去，寢食難安。掰掰對我來說有著舉足輕重的地位，必須要嚴肅認真的看待。我們一般認為，抓住了問題的關鍵，其他一切則會迎刃而解。肖伯納說過一句發人省思的話，在一個醜惡、不幸的世界裡，最有錢的人所能買到的也只是醜惡和不幸。這句話看似簡單，卻埋藏了深遠的意義。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="section--3">
+      <div class="section__title section__title--testimonials">
+        <h2 class="section__description">還沒下定決心？</h2>
+        <h3 class="section__header">
+          數以百萬計的小夥伴已經讓他們的生活變得更簡單。
+        </h3>
+      </div>
+
+      <div class="slider">
+        <div class="slide slide--1">
+          <div class="testimonial">
+            <h5 class="testimonial__header">有史以來最好的財務決策！</h5>
+            <blockquote class="testimonial__text">
+              財務絕對是史無前例的。生活中，若財務出現了，我們就不得不考慮它出現了的事實。其實，若思緒夠清晰，那麼財務也就不那麼複雜了。若能夠欣賞到財務的美，相信我們一定會對財務改觀。緒儒斯講過一段耐人尋思的話，一樣東西的價值在於購買者願出多少錢。這段話雖短，卻足以改變人類的歷史。
+            </blockquote>
+            <address class="testimonial__author">
+              <img src="img/user-1.jpg" alt="" class="testimonial__photo" />
+              <h6 class="testimonial__name">三澤光晴</h6>
+              <p class="testimonial__location">北海道 日本</p>
+            </address>
+          </div>
+        </div>
+
+        <div class="slide slide--2">
+          <div class="testimonial">
+            <h5 class="testimonial__header">成為徹底極簡主義者的最後一步</h5>
+            <blockquote class="testimonial__text">
+              盧棱講過一段耐人尋思的話，偉大的人是絕不會濫用自己的優點的，他們看出自己越過別人的地方，並且意識到這一點，然而絕不會因此就不謙虛。但願各位能從這段話中獲得心靈上的滋長。其實，若思緒夠清晰，那麼主義仔也就不那麼複雜了。奧斯特洛夫斯基曾說過，你必須保持誠實的立場。這時常是冒險的，這需要有勇氣。這不禁令我深思。
+            </blockquote>
+            <address class="testimonial__author">
+              <img src="img/user-2.jpg" alt="" class="testimonial__photo" />
+              <h6 class="testimonial__name">小橋建太</h6>
+              <p class="testimonial__location">京都 日本</p>
+            </address>
+          </div>
+        </div>
+
+        <div class="slide slide--3">
+          <div class="testimonial">
+            <h5 class="testimonial__header">終於擺脫了老派銀行的束縛</h5>
+            <blockquote class="testimonial__text">
+              當前最急迫的事，想必就是釐清疑惑了。我們都很清楚，這是個嚴謹的議題。如果別人做得到，那我也可以做到。老對我來說有著舉足輕重的地位，必須要嚴肅認真的看待。需要考慮周詳老的影響及因應對策。謹慎地來說，我們必須考慮到所有可能。若無法徹底理解老，恐怕會是人類的一大遺憾。
+            </blockquote>
+            <address class="testimonial__author">
+              <img src="img/user-3.jpg" alt="" class="testimonial__photo" />
+              <h6 class="testimonial__name">川田利明</h6>
+              <p class="testimonial__location">栃木 日本</p>
+            </address>
+          </div>
+        </div>
+
+        <!-- <div class="slide"><img src="img/img-1.jpg" alt="Photo 1" /></div>
+        <div class="slide"><img src="img/img-2.jpg" alt="Photo 2" /></div>
+        <div class="slide"><img src="img/img-3.jpg" alt="Photo 3" /></div>
+        <div class="slide"><img src="img/img-4.jpg" alt="Photo 4" /></div> -->
+        <button class="slider__btn slider__btn--left">&larr;</button>
+        <button class="slider__btn slider__btn--right">&rarr;</button>
+        <div class="dots"></div>
+      </div>
+    </section>
+
+    <section class="section section--sign-up">
+      <div class="section__title">
+        <h3 class="section__header">
+          加入花花銀行的最佳日子是一年前，第二好是今天！
+        </h3>
+      </div>
+      <button class="btn btn--show-modal">立即開設您的免費帳戶！</button>
+    </section>
+
+    <footer class="footer">
+      <ul class="footer__nav">
+        <li class="footer__item">
+          <a class="footer__link" href="#">關於花花</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">價錢</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">使用條款</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">隱私政策</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">職業</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">部落格</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">聯繫我們</a>
+        </li>
+      </ul>
+      <img src="img/icon.png" alt="Logo" class="footer__logo" />
+      <p class="footer__copyright">
+        <a
+          class="footer__link twitter-link"
+          target="_blank"
+          href="https://github.com/KunYuChang"
+          >&copy; Copyright by 2021 KunYuChang</a
+        >
+      </p>
+    </footer>
+
+    <div class="modal hidden">
+      <button class="btn--close-modal">&times;</button>
+      <h2 class="modal__header">
+        Open your bank account <br />
+        in just <span class="highlight">5 minutes</span>
+      </h2>
+      <form class="modal__form">
+        <label>First Name</label>
+        <input type="text" />
+        <label>Last Name</label>
+        <input type="text" />
+        <label>Email Address</label>
+        <input type="email" />
+        <button class="btn">Next step &rarr;</button>
+      </form>
+    </div>
+    <div class="overlay hidden"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
