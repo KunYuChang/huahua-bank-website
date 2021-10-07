@@ -343,3 +343,4 @@ const slider = function () {
   });
 };
 slider();
+
