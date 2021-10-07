@@ -148,52 +148,14 @@ nav.addEventListener('mouseout', e => {
 ///////////////////////////////////////
 ///////////////////////////////////////
 
-// ⚡Sticky navigation
-// const initialCoords = section1.getBoundingClientRect();
-// console.log(initialCoords);
-
-// window.addEventListener('scroll', () => {
-//   console.log(window.scrollY);
-
-//   if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
-//   else nav.classList.remove('sticky');
-// });
-
 // ⚡Sticky navigation: Intersection Observer API
-
-// const obsCallback = function (entries, observer) {
-//   entries.forEach(entry => {
-//     console.log(entry);
-//   });
-// };
-
-// const obsOptions = {
-//   root: null,
-//   threshold: [0, 0.2],
-// };
-
-// /*
-// root：預設（未指定，或值設定為 null 時）是以瀏覽器的 viewport 為範圍來判定目標元素的進出與否，然而也能在此設定要改以哪個其他元素作為觀察範圍 — 需要注意的是「root 必須要是所有目標元素的父元素（或祖父層的元素）」
-
-// threshold：設定目標元素的可見度達到多少比例時，觸發 callback 函式。可以帶入單一一個值：「只想在可見度達一個比例時觸發」；也可帶入一個陣列：「想在可見度達多個比例時觸發」
-// 👉 觀察範圍就是前面設定的 root 搭配 rootMargin 所劃定
-// 👉 預設值為 0：一但目標進入或目標的最後一個 px 離開觀察範圍時就觸發
-// 👉 設定為 0.5 ：一但可見度為 50% 時就觸發
-// 👉 設定為 [0, 0.25, 0.5, 0.75, 1]：可見度每跳 25% 時就觸發
-// 👉 設定為 1：可見度達 100% 或一但往下掉低於 100% 時就觸發
-// */
-
-// // 建立一個觀察者
-// const observer = new IntersectionObserver(obsCallback, obsOptions);
-// // 觀察者.觀察(被觀察者)
-// observer.observe(section1);
 
 const headerSection = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
 
 const stickyNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
+  // console.log(entry);
 
   if (!entry.isIntersecting) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
@@ -211,24 +173,173 @@ headerObserver.observe(headerSection);
 ///////////////////////////////////////
 
 // ⚡滾動顯示元素
+
 const allTheSections = document.querySelectorAll('.section');
 
+// (1) entries ：IntersectionObserverEntry 的 array
+// (2) observer：observer 本身。
 const revealSection = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
+  // console.log(entry);
 
+  // 如果獵物不可見即離開這個函式
   if (!entry.isIntersecting) return;
 
+  // 獵物(entry.target)的class移除'section--hidden'
   entry.target.classList.remove('section--hidden');
+
+  // 獵人(observer).不觀察(unobserve)獵物了(entry.target)
   observer.unobserve(entry.target);
 };
 
+// 實例出一個交叉觀察者，有兩個參數 (1) Callback (2) 呼叫的條件
 const sectionObserver = new IntersectionObserver(revealSection, {
   root: null,
   threshold: 0.15,
 });
 
+// 1. 所有的部分(section)都要被觀察者(sectionObserver)觀察(observe)
+// 2. 所有的部分(section)加上'section--hidden'類別
 allTheSections.forEach(function (section) {
   sectionObserver.observe(section);
   section.classList.add('section--hidden');
 });
+
+///////////////////////////////////////
+///////////////////////////////////////
+
+// ⚡圖片懶載入 (Lazy loading images)
+// 圖片懶載入的要點是從一開始就加快頁面的載入速度，這一方面具有 SEO 的好處，另一方面，使訪問者保持較慢的 Internet 連接（對於他們來說，頁面載入速度會比在您自己的 PC 上慢）。--Sebastian
+
+// 找到所有的被觀察者
+const imgTargets = document.querySelectorAll('img[data-src]');
+// console.log(imgTargets);
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries; // 只有一個界線,提取
+  // console.log(entry)
+
+  if (!entry.isIntersecting) return;
+
+  // data-src 取代 src
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', () => {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observer.unobserve(entry.target);
+};
+
+// 創建一個圖片的觀察者
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null, // viewport
+  threshold: 0, // 觸發界線
+  rootMargin: '-200px', // 為了看到效果延後圖片載入 (正常設定要設為200px提早載入)
+});
+
+// 遍歷圖片 -> 觀察者觀察圖片
+imgTargets.forEach(img => imgObserver.observe(img));
+
+///////////////////////////////////////
+///////////////////////////////////////
+
+// ⚡輪播
+const slider = function () {
+  const slides = document.querySelectorAll('.slide');
+  const btnLeft = document.querySelector('.slider__btn--left');
+  const btnRight = document.querySelector('.slider__btn--right');
+  const dotContainer = document.querySelector('.dots');
+
+  let curSlide = 0;
+  const maxSlide = slides.length;
+
+  // 開發觀察用的程式碼
+  // const slider = document.querySelector('.slider');
+  // slider.style.transform = 'scale(0.4) translateX(-800px)';
+  // slider.style.overflow = 'visible';
+
+  // 🎾Functions
+
+  // 創建點
+  const createDots = function () {
+    slides.forEach(function (_, i) {
+      dotContainer.insertAdjacentHTML(
+        'beforeend',
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  };
+
+  // 當前點
+  const activateDot = function (slide) {
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach(dot => dot.classList.remove('dots__dot--active'));
+
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`) //屬性選擇器
+      .classList.add('dots__dot--active');
+  };
+
+  // 圖片轉移
+  const goToSlide = function (slide) {
+    slides.forEach(
+      // 這段程式碼是整個輪播思維的精華 (通常來自開發經驗)
+      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+  };
+
+  // 下一頁
+  const nextSlide = function () {
+    if (curSlide === maxSlide - 1) {
+      curSlide = 0;
+    } else {
+      curSlide++;
+    }
+
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  // 上一頁
+  const prevSlide = function () {
+    if (curSlide === 0) {
+      curSlide = maxSlide - 1;
+    } else {
+      curSlide--;
+    }
+
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  const init = function () {
+    createDots();
+    activateDot(0);
+    goToSlide(0);
+  };
+  init();
+
+  // 🎾事件處理程式
+
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
+
+  document.addEventListener('keydown', function (e) {
+    console.log(e); // 先看看key的value是什麼
+
+    if (e.key === 'ArrowLeft') prevSlide(); // 用if
+    e.key === 'ArrowRight' && nextSlide(); // 用短路
+  });
+
+  // dotContainer 進行事件委派，監聽下面的dot。
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      const slide = e.target.dataset.slide;
+      goToSlide(slide);
+      activateDot(slide);
+    }
+  });
+};
+slider();
